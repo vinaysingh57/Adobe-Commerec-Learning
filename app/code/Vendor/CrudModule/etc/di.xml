@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Vendor. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Vendor\CrudModule\Api\Data\ItemInterface" type="Vendor\CrudModule\Model\Item"/>
+    <preference for="Vendor\CrudModule\Api\ItemRepositoryInterface" type="Vendor\CrudModule\Model\ItemRepository"/>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="vendor_crud_item_listing_data_source" xsi:type="string">Vendor\CrudModule\Model\ResourceModel\Item\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="Vendor\CrudModule\Model\ResourceModel\Item\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vendor_crud_item</argument>
+            <argument name="resourceModel" xsi:type="string">Vendor\CrudModule\Model\ResourceModel\Item</argument>
+        </arguments>
+    </virtualType>
+</config>

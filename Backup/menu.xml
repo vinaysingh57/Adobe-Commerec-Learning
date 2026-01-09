@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="Vendor_CrudExample::crudexample_root" title="CRUD Example" translate="title" module="Vendor_CrudExample" sortOrder="100" resource="Vendor_CrudExample::crudexample_root" />
+        <add id="Vendor_CrudExample::crudexample_item" title="Manage Items" translate="title" module="Vendor_CrudExample" sortOrder="10" parent="Vendor_CrudExample::crudexample_root" action="crudexample/item/index" resource="Vendor_CrudExample::crudexample_item" />
+    </menu>
+</config>

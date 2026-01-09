@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Vendor. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Vendor_CrudModule::crud" title="CRUD Module" module="Vendor_CrudModule" sortOrder="50" resource="Vendor_CrudModule::crud"/>
+        <add id="Vendor_CrudModule::item" title="Manage Items" module="Vendor_CrudModule" sortOrder="10" action="vendor_crud/item/index" resource="Vendor_CrudModule::item" parent="Vendor_CrudModule::crud"/>
+    </menu>
+</config>

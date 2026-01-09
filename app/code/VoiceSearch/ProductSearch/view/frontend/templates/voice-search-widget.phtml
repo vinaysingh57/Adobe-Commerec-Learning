@@ -1,0 +1,231 @@
+<?php
+/**
+ * @var \VoiceSearch\ProductSearch\Block\VoiceSearch $block
+ */
+?>
+<div class="voice-search-widget">
+    <button id="voice-search-widget-btn" class="voice-search-widget-button" type="button" title="<?= __('Voice Search') ?>">
+        <span class="voice-search-widget-icon">🎤</span>
+    </button>
+    
+    <div class="voice-search-widget-modal" id="voice-search-widget-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><?= __('Voice Search') ?></h3>
+                <button type="button" class="modal-close" id="voice-search-modal-close">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="voice-controls">
+                    <button id="voice-widget-search-btn" class="voice-widget-button" type="button">
+                        <span class="voice-icon">🎤</span>
+                        <span class="voice-text"><?= __('Start Listening') ?></span>
+                    </button>
+                </div>
+                
+                <div class="voice-status" id="voice-widget-status" style="display: none;">
+                    <span class="status-text"></span>
+                </div>
+                
+                <div class="voice-transcript" id="voice-widget-transcript" style="display: none;">
+                    <strong><?= __('You said:') ?></strong> <span class="transcript-text"></span>
+                </div>
+                
+                <div class="voice-widget-results" id="voice-widget-results" style="display: none;">
+                    <div class="results-list"></div>
+                </div>
+                
+                <div class="voice-widget-error" id="voice-widget-error" style="display: none;">
+                    <div class="error-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    ".voice-search-widget": {
+        "VoiceSearch_ProductSearch/js/voice-search-widget": <?= /* @escapeNotVerified */ json_encode($block->getVoiceSearchConfig()) ?>
+    }
+}
+</script>
+
+<style>
+.voice-search-widget {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.voice-search-widget-button {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.voice-search-widget-button:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.voice-search-widget-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.voice-controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.voice-widget-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.voice-widget-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.voice-widget-button.listening {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    animation: pulse 2s infinite;
+}
+
+.voice-status {
+    padding: 10px;
+    background: #e3f2fd;
+    border-radius: 5px;
+    color: #1976d2;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.voice-transcript {
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    border-left: 4px solid #4caf50;
+    margin-bottom: 15px;
+}
+
+.voice-widget-results .results-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #333;
+}
+
+.result-item:hover {
+    background: #f5f5f5;
+}
+
+.result-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.result-info {
+    flex: 1;
+}
+
+.result-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.result-price {
+    color: #e53e3e;
+    font-weight: bold;
+}
+
+.voice-widget-error {
+    padding: 15px;
+    background: #ffebee;
+    border-radius: 5px;
+    border-left: 4px solid #f44336;
+    color: #c62828;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .modal-header, .modal-body {
+        padding: 15px;
+    }
+}
+</style>

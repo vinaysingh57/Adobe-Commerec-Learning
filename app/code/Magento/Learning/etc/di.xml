@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Changing value for both Controllers  -->
+   <type name="Magento\Learning\Model\ClassDefault">
+        <arguments>
+                <argument name="namespace" xsi:type="string">test</argument>
+        </arguments>
+    </type>
+    <!-- Changing value for both Controllers  -->
+
+    <!-- Changing value for Index Controllers Only  -->
+    <virtualType name="ClassDefaultVirtual" type="Magento\Learning\Model\ClassDefault">
+        <arguments>
+            <argument name="namespace" xsi:type="string">This is for Vtirtual type</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Learning\Controller\Index\Index">
+        <arguments>
+            <argument name="classDefault" xsi:type="object">ClassDefaultVirtual</argument>
+        </arguments>
+    </type>
+    <!-- Changing value for Index Controllers only  -->
+
+    <type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin name="learning_index_around_plugin" type="Magento\Learning\Plugin\IndexPlugin" />
+    </type>
+
+    
+   <!-- <type name="Magento\Catalog\Model\Product">
+        <plugin name="product_name_plugin" type="Magento\Learning\Plugin\ProductPlugin" />
+    </type>-->
+
+    
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="custom_product_extension" type="Magento\Learning\Plugin\ProductRepositoryPlugin" />
+    </type>
+
+
+    
+ 
+</config>

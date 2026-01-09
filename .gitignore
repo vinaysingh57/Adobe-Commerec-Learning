@@ -1,0 +1,6 @@
+app/etc/env.php
+var/
+generated/
+pub/media/
+pub/static/
+vendor/

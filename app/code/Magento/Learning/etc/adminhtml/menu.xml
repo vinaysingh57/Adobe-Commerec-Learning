@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magento_Learning::learning" title="Learning" translate="title" module="Magento_Learning" sortOrder="15" dependsOnModule="Magento_Learning" resource="Magento_Learning::learning"/>
+        <add id="Magento_Learning::create_controller" title="Call Controller" translate="title" module="Magento_Learning" sortOrder="10" parent="Magento_Learning::learning" action="learning/index/index/" resource="Magento_Learning::create_controller" />
+    </menu>
+</config>

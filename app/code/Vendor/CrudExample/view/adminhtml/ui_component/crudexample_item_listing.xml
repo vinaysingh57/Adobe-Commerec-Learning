@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">crudexample_item_listing.crudexample_item_listing_data_source</item>
+            <item name="deps" xsi:type="string">crudexample_item_listing.crudexample_item_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">crudexample_item_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Add New Item</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">crudexample/item/edit</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="crudexample_item_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Vendor\CrudExample\Ui\Component\DataProvider</argument>
+            <argument name="name" xsi:type="string">crudexample_item_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">item_id</argument>
+            <argument name="requestFieldName" xsi:type="string">item_id</argument>
+        </argument>
+    </dataSource>
+    <columns name="crudexample_item_columns">
+        <column name="item_id">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="description">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Description</label>
+            </settings>
+        </column>
+    <actionsColumn name="actions" class="Magento\Ui\Component\Listing\Columns\Actions">
+            <settings>
+                <indexField>item_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

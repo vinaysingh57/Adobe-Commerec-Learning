@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Cron\Learning\Cron\DeactivateMboUser">
+        <arguments>
+            <argument name="userFactory" xsi:type="object">Magento\User\Model\UserFactory</argument>
+            <argument name="userCollectionFactory" xsi:type="object">Magento\User\Model\ResourceModel\User\CollectionFactory</argument>
+            <argument name="dateTime" xsi:type="object">Magento\Framework\Stdlib\DateTime\DateTime</argument>
+            <argument name="state" xsi:type="object">Magento\Framework\App\State</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="custom_event_demo">
+        <observer name="observer_learning_custom_event" instance="Observer\Learning\Observer\CustomEventObserver" />
+    </event>
+    <event name="customer_login">
+        <observer name="observer_learning_log_customer_login" instance="Observer\Learning\Observer\LogCustomerLogin" />
+    </event>
+</config>

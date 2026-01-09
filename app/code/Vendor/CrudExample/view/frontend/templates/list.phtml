@@ -1,0 +1,21 @@
+<h2>Item List</h2>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$collection = $objectManager->create('Vendor\CrudExample\Model\ResourceModel\Item\Collection');
+?>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Created At</th>
+    </tr>
+    <?php foreach ($collection as $item): ?>
+    <tr>
+        <td><?= $item->getId() ?></td>
+        <td><?= $item->getData('name') ?></td>
+        <td><?= $item->getData('created_at') ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+<a href="<?= $block->getUrl('crudexample/index/add') ?>">Add New Item</a>
