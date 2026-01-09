@@ -4,3 +4,5 @@ generated/
 pub/media/
 pub/static/
 vendor/
+setup/
+dev/
