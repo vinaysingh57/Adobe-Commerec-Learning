@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <!-- Fired after a successful admin login — check if force-reset is needed -->
+    <event name="backend_auth_user_login_success">
+        <observer name="user_mbopasswordreset_check_force_change"
+                  instance="User\MboPasswordReset\Observer\CheckForcePasswordChange"/>
+    </event>
+
+    <!-- Fired after any admin user is saved — flag new MBO users -->
+    <event name="admin_user_save_after">
+        <observer name="user_mbopasswordreset_set_force_change_on_create"
+                  instance="User\MboPasswordReset\Observer\SetForcePasswordChangeOnCreate"/>
+    </event>
+
+</config>

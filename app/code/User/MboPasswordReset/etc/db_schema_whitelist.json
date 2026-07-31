@@ -1,0 +1,8 @@
+{
+    "admin_user": {
+        "column": {
+            "user_type": true,
+            "force_password_change": true
+        }
+    }
+}

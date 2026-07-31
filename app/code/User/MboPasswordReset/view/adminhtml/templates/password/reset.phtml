@@ -1,0 +1,124 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+$formKey   = $block->getFormKey();
+$actionUrl = $block->getUrl('mbopasswordreset/password/save');
+?>
+<div class="admin__content-heading">
+    <h1 class="admin__content-heading-text"><?= $block->escapeHtml(__('Password Reset Required')) ?></h1>
+    <p class="admin__content-heading-subtext">
+        <?= $block->escapeHtml(__('For security reasons, you must set a new password before continuing.')) ?>
+    </p>
+</div>
+
+<div class="admin-password-reset-form-wrap" style="max-width:480px; margin:2rem auto;">
+
+    <?php /* Inline messages rendered via session message manager */ ?>
+    <?= $block->getChildHtml('messages') ?>
+
+    <form id="mbo-password-reset-form"
+          action="<?= $block->escapeUrl($actionUrl) ?>"
+          method="post"
+          autocomplete="off"
+          novalidate="novalidate">
+
+        <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>"/>
+
+        <fieldset class="admin__fieldset">
+
+            <div class="admin__field _required">
+                <label class="admin__field-label" for="current_password">
+                    <span><?= $block->escapeHtml(__('Current Password')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="current_password"
+                           name="current_password"
+                           type="password"
+                           class="admin__control-text"
+                           autocomplete="current-password"
+                           required
+                           placeholder="<?= $block->escapeHtmlAttr(__('Enter current password')) ?>"/>
+                </div>
+            </div>
+
+            <div class="admin__field _required">
+                <label class="admin__field-label" for="new_password">
+                    <span><?= $block->escapeHtml(__('New Password')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="new_password"
+                           name="new_password"
+                           type="password"
+                           class="admin__control-text"
+                           autocomplete="new-password"
+                           required
+                           minlength="7"
+                           placeholder="<?= $block->escapeHtmlAttr(__('Minimum 7 characters, one letter & digit')) ?>"/>
+                </div>
+            </div>
+
+            <div class="admin__field _required">
+                <label class="admin__field-label" for="confirm_password">
+                    <span><?= $block->escapeHtml(__('Confirm New Password')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="confirm_password"
+                           name="confirm_password"
+                           type="password"
+                           class="admin__control-text"
+                           autocomplete="new-password"
+                           required
+                           placeholder="<?= $block->escapeHtmlAttr(__('Re-enter new password')) ?>"/>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <div class="admin__actions-switch" style="margin-top:1.5rem;">
+            <button type="submit"
+                    class="action-primary action-accept"
+                    id="mbo-reset-submit">
+                <span><?= $block->escapeHtml(__('Change Password')) ?></span>
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    require(['jquery', 'mage/translate'], function ($, $t) {
+        'use strict';
+
+        $('#mbo-password-reset-form').on('submit', function (e) {
+            var newPass     = $('#new_password').val();
+            var confirmPass = $('#confirm_password').val();
+            var currentPass = $('#current_password').val();
+            var hasLetter   = /[a-zA-Z]/.test(newPass);
+            var hasDigit    = /[0-9]/.test(newPass);
+
+            if (!currentPass) {
+                e.preventDefault();
+                alert($t('Please enter your current password.'));
+                return;
+            }
+            if (newPass.length < 7) {
+                e.preventDefault();
+                alert($t('Password must be at least 7 characters long.'));
+                return;
+            }
+            if (!hasLetter || !hasDigit) {
+                e.preventDefault();
+                alert($t('Password must contain at least one letter and one numeric character.'));
+                return;
+            }
+            if (newPass !== confirmPass) {
+                e.preventDefault();
+                alert($t('New password and confirmation do not match.'));
+                return;
+            }
+            if (currentPass === newPass) {
+                e.preventDefault();
+                alert($t('Your new password must be different from the current password.'));
+            }
+        });
+    });
+</script>

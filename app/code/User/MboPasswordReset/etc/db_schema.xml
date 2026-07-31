@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!--
+        Extend the admin_user table with two new columns:
+          user_type             — differentiates MBO users from regular admins
+          force_password_change — flag requiring the user to reset on first login
+    -->
+    <table name="admin_user" resource="default" comment="Admin User Table">
+        <column xsi:type="varchar"
+                name="user_type"
+                nullable="true"
+                length="32"
+                comment="User Type (e.g. mbo)"/>
+        <column xsi:type="smallint"
+                name="force_password_change"
+                unsigned="false"
+                nullable="false"
+                identity="false"
+                default="0"
+                comment="Force Password Change on Next Login (1=yes, 0=no)"/>
+    </table>
+</schema>

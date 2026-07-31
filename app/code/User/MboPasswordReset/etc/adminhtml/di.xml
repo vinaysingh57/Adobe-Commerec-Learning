@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Intercept every admin controller dispatch to redirect MBO users with an active reset flag. -->
+    <type name="Magento\Backend\App\AbstractAction">
+        <plugin name="user_mbopasswordreset_enforce_password_reset"
+                type="User\MboPasswordReset\Plugin\EnforcePasswordReset"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+
+    <!-- Inject the post-reset success message on the login page via URL parameter. -->
+    <type name="Magento\Backend\Controller\Adminhtml\Auth\Login">
+        <plugin name="user_mbopasswordreset_login_password_reset_message"
+                type="User\MboPasswordReset\Plugin\LoginPasswordResetMessage"
+                sortOrder="10"/>
+    </type>
+
+
+</config>
