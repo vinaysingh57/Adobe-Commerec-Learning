@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Commercetools API Integration. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Console/etc/di.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="commercetools_api_test" xsi:type="object">Commercetools\Api\Console\Command\TestApiCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

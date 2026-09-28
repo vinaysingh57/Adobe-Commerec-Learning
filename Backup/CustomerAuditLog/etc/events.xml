@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Registered globally (not etc/frontend) so GraphQL/REST/SOAP customer token logins,
+         which never touch Magento\Customer\Model\Session, are captured too -->
+    <event name="customer_customer_authenticated">
+        <observer name="abbottCustomerAuditLogLoginSuccess"
+                  instance="Abbott\CustomerAuditLog\Observer\LoginSuccessObserver"/>
+    </event>
+</config>

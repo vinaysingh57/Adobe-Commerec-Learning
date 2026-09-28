@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="abbott_ziggiz" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Ziggiz Logger</label>
+            <tab>abbott</tab>
+            <resource>Abbott_ZiggizLogger::config</resource>
+
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Ziggiz Logger</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable sending logs to Ziggiz</comment>
+                </field>
+
+                <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ziggiz Endpoint URL</label>
+                    <comment>OTLP logs endpoint. Default: https://lunarhelix.sh3.us-east-2.aws.ziggiz.io:4318/v1/logs</comment>
+                    <validate>required-entry validate-url</validate>
+                </field>
+
+                <field id="token" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Authorization Token</label>
+                    <comment>Bearer token for authentication. Stored securely.</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+
+                <field id="log_level" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Minimum Log Level</label>
+                    <source_model>Abbott\ZiggizLogger\Model\Config\Source\LogLevel</source_model>
+                    <comment>Only logs at or above this level will be sent to Ziggiz</comment>
+                </field>
+
+                <field id="timeout" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Request Timeout (seconds)</label>
+                    <validate>required-entry validate-number validate-greater-than-zero</validate>
+                    <comment>HTTP request timeout in seconds</comment>
+                </field>
+
+                <field id="service_name" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Service Name</label>
+                    <comment>Service identifier in Ziggiz (e.g., magento, abbott-ecommerce)</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Commercetools API Integration. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Interface preferences -->
+    <preference for="Commercetools\Api\Api\ConfigurationInterface" type="Commercetools\Api\Model\Configuration" />
+    <preference for="Commercetools\Api\Api\ProductRepositoryInterface" type="Commercetools\Api\Model\ProductRepository" />
+    <preference for="Commercetools\Api\Api\Data\ProductInterface" type="Commercetools\Api\Model\Data\Product" />
+
+    <!-- Logger for Commercetools API -->
+    <virtualType name="CommercetoolsApiLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">commercetools_api</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">CommercetoolsApiLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="CommercetoolsApiLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/commercetools_api.log</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Inject custom logger into API client -->
+    <type name="Commercetools\Api\Service\ApiClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">CommercetoolsApiLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- Inject custom logger into product repository -->
+    <type name="Commercetools\Api\Model\ProductRepository">
+        <arguments>
+            <argument name="logger" xsi:type="object">CommercetoolsApiLogger</argument>
+        </arguments>
+    </type>
+
+    <!-- HTTP Client configuration -->
+    <virtualType name="CommercetoolsApiCurl" type="Magento\Framework\HTTP\Client\Curl">
+        <arguments>
+            <argument name="config" xsi:type="array">
+                <item name="timeout" xsi:type="number">30</item>
+                <item name="useragent" xsi:type="string">Magento/2.4 (Commercetools API Integration)</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Use custom HTTP client for API calls -->
+    <type name="Commercetools\Api\Service\ApiClient">
+        <arguments>
+            <argument name="curl" xsi:type="object">CommercetoolsApiCurl</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <abbott_ziggiz>
+            <general>
+                <enabled>0</enabled>
+                <endpoint>https://lunarhelix.sh3.us-east-2.aws.ziggiz.io:4318/v1/logs</endpoint>
+                <token></token>
+                <log_level>200</log_level>
+                <timeout>30</timeout>
+                <service_name>an6533-commerce</service_name>
+            </general>
+        </abbott_ziggiz>
+    </default>
+</config>

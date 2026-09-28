@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Abbott Laboratories. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_login">
+        <observer name="abbott_customer_audit_log_login_success"
+                  instance="Abbott\CustomerAuditLog\Observer\CustomerLoginSuccess"/>
+    </event>
+    <event name="customer_logout">
+        <observer name="abbott_customer_audit_log_logout"
+                  instance="Abbott\CustomerAuditLog\Observer\CustomerLogout"/>
+    </event>
+</config>

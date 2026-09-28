@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Storefront-session logout only; API/GraphQL token revocation is covered by
+         Plugin\TokenLogoutPlugin since it never dispatches this event -->
+    <event name="customer_logout">
+        <observer name="abbottCustomerAuditLogLogout"
+                  instance="Abbott\CustomerAuditLog\Observer\LogoutObserver"/>
+    </event>
+</config>

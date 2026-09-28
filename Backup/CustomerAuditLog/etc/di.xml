@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Abbott\CustomerAuditLog\Api\Data\AuditEventInterface" type="Abbott\CustomerAuditLog\Model\AuditEvent" />
+    <preference for="Abbott\CustomerAuditLog\Api\AuditLoggerInterface" type="Abbott\CustomerAuditLog\Model\AuditLogger" />
+
+    <virtualType name="Abbott\CustomerAuditLog\Logger\AuditVirtual" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">CustomerAuditLog</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="audit" xsi:type="object">Abbott\CustomerAuditLog\Logger\Handler\AuditHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Abbott\CustomerAuditLog\Logger\Virtual" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">CustomerAuditLog</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="error" xsi:type="object">Abbott\CustomerAuditLog\Logger\Handler\ErrorHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\CustomerAuditLog\Model\AuditLogger">
+        <arguments>
+            <argument name="auditLogger" xsi:type="object">Abbott\CustomerAuditLog\Logger\AuditVirtual</argument>
+            <argument name="errorLogger" xsi:type="object">Abbott\CustomerAuditLog\Logger\Virtual</argument>
+        </arguments>
+    </type>
+
+    <!-- Login failure, password change and password reset: none of authenticate(),
+         changePassword[ById]() or initiatePasswordReset()/resetPassword() dispatch a native event -->
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="abbottCustomerAuditLogAuthenticateFailure"
+                type="Abbott\CustomerAuditLog\Plugin\AuthenticateFailurePlugin"/>
+        <plugin name="abbottCustomerAuditLogPasswordChange"
+                type="Abbott\CustomerAuditLog\Plugin\PasswordChangePlugin"/>
+        <plugin name="abbottCustomerAuditLogPasswordReset"
+                type="Abbott\CustomerAuditLog\Plugin\PasswordResetPlugin"/>
+    </type>
+
+    <!-- Account lock/unlock: no native event on processAuthenticationFailure()/unlock() -->
+    <type name="Magento\Customer\Model\Authentication">
+        <plugin name="abbottCustomerAuditLogAccountLock"
+                type="Abbott\CustomerAuditLog\Plugin\AccountLockPlugin"/>
+        <plugin name="abbottCustomerAuditLogAccountUnlock"
+                type="Abbott\CustomerAuditLog\Plugin\AccountUnlockPlugin"/>
+    </type>
+
+    <!-- API/GraphQL/SOAP logout: token revocation never dispatches customer_logout -->
+    <type name="Magento\Integration\Api\CustomerTokenServiceInterface">
+        <plugin name="abbottCustomerAuditLogTokenLogout"
+                type="Abbott\CustomerAuditLog\Plugin\TokenLogoutPlugin"/>
+    </type>
+</config>

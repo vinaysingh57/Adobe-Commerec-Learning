@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/topology.xsd">
+    <exchange name="abbott-ziggiz-logger" type="topic" connection="db">
+        <binding id="abbottZiggizLoggerPublish" topic="abbott.ziggiz.logger" destinationType="queue" destination="abbott.ziggiz.logger"/>
+    </exchange>
+</config>

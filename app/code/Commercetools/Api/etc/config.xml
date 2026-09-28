@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Commercetools API Integration. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <commercetools_api>
+            <general>
+                <enabled>1</enabled>
+                <debug>0</debug>
+            </general>
+            <connection>
+                <project_key/>
+                <client_id/>
+                <client_secret/>
+                <access_token/>
+                <api_url>https://api.sphere.io</api_url>
+            </connection>
+        </commercetools_api>
+    </default>
+</config>

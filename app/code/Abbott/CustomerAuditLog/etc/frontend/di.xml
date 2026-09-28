@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Abbott Laboratories. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Frontend-only: admin and web API authentication are intentionally not audited. -->
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="abbott_customer_audit_log_account_management"
+                type="Abbott\CustomerAuditLog\Plugin\AccountManagementPlugin"/>
+    </type>
+</config>
